@@ -9,77 +9,77 @@ int i = 0;
 bool playagain = true;
 std::vector<int> highscore(10);
 
+
+
 int main() {
 	do {
-		int max = 5;
+		int difficulty;
+		int max = 0;
+		std::cout << "Choose difficulty:" << std::endl;
+		std::cout << "1 = easy (1-5)  2 = medium (1-10)  3 = hard(1-30)" << std::endl;
+		std::cin >> difficulty;
+		if (difficulty == 1) {
+			max = 5;
+		}
+		else if (difficulty == 2) {
+			max = 10;
+		}
+		else if (difficulty == 3) {
+			max = 30;
+		}
+		else {
+			std::cout << "invalid input";
+		}
+		
 		int rng;
 		int guess;
 		int counter = 0;
 		int playagainint = 0;
-		int zero = 0;
 		std::cout << "Enter a number:" << std::endl;
-		std::cin >> guess;
 		std::srand(time(0));
 		rng = (std::rand() % max) + 1;
-		do {
+		while (true){
+			std::cin >> guess;
+			counter++;
 			if (guess > rng) {
 				std::cout << "Your number is too high" << std::endl;
 				std::cout << "Enter another number:" << std::endl;
-				std::cin >> guess;
+				
 			}
 			else if (guess < rng) {
 				std::cout << "Your number is too low" << std::endl;
-				std::cout << "Enter another number" << std::endl;
-				std::cin >> guess;
+				std::cout << "Enter another number:" << std::endl;
+				
 			}
-			if (counter == 0 && guess == rng) {
-				counter--;
+			else {
+				break;
 			}
-			counter++;
-			
-			
-		} while (rng != guess);
+		}
 		std::cout << "Congratulation you guessed the right number!" << std::endl;
-		std::cout << "Amount of guesses:" << counter + 1 << std::endl;
-		if (i > 9 && highscore[9] > counter + 1) {
-			highscore[9] = counter + 1;
+		std::cout << "Amount of guesses:" << counter << std::endl;
+		if (counter > highscore[1]) {
+			std::cout << "Congratulation you beat the highscore!" << std::endl;
+		}
+		else if (counter = highscore[1]) {
+			std::cout << "Congratulation you got equal to the highscore!" << std::endl;
+		}
+		highscore.insert(highscore.begin(), counter);
+		std::sort(highscore.begin(), highscore.end());
+		highscore.pop_back();
+		if (i > 9 && highscore[9] > counter) {
+			highscore[9] = counter;
 		}
 		else if (i < 9) {
-			highscore[i] = counter + 1;
+			highscore[i] = counter;
 		}
 		std::sort(highscore.begin(), highscore.end());
 		std::cout << "----------Highscores----------" << std::endl;
-		if (highscore[1] > 0) {
-			std::cout << highscore[1] << std::endl;
+		
+		for (int j = 0; j < 10; j++) {
+			if (highscore[j] > 0) {
+				std::cout <<highscore[j] << std::endl;
+			}
 		}
-		if (highscore[2] > 0) {
-			std::cout << highscore[2] << std::endl;
-		}
-		if (highscore[3] > 0) {
-			std::cout << highscore[3] << std::endl;
-		}
-		if (highscore[3] > 0) {
-			std::cout << highscore[3] << std::endl;
-		}
-		if (highscore[4] > 0) {
-			std::cout << highscore[4] << std::endl;
-		}
-		if (highscore[5] > 0) {
-			std::cout << highscore[5] << std::endl;
-		}
-		if (highscore[6] > 0) {
-			std::cout << highscore[6] << std::endl;
-		}
-		if (highscore[7] > 0) {
-			std::cout << highscore[7] << std::endl;
-		}
-		if (highscore[8] > 0) {
-			std::cout << highscore[8] << std::endl;
-		}
-		if (highscore[9] > 0) {
-			std::cout << highscore[9] << std::endl;
-		}
-		i++;
 		std::cout << "Would you like to play again?" << std::endl;
 		std::cout << "For yes enter: 1    For no enter: 2" << std::endl;
 		std::cin >> playagainint;
